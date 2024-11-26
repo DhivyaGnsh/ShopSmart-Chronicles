@@ -8,3 +8,15 @@ highest_spending_combination = (
     .head(1)
 )
 print(highest_spending_combination)
+
+
+highest revenue for each location, considering only customers with positive reviews
+
+positive_reviews_revenue = (
+    data[data['Review Rating'] > 3]
+    .groupby(['Location', 'Season'])['Purchase Amount (USD)']
+    .sum()
+    .unstack()
+    .idxmax(axis=1)
+)
+print(positive_reviews_revenue)
